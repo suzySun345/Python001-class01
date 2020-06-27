@@ -10,9 +10,10 @@ from itemadapter import ItemAdapter
 
 class SpidersPipeline:
     def process_item(self, item, spider):
-        name = item['name']
-        i_type = item['m_type']
-        i_time = item['m_time']
+        adapter = ItemAdapter(item)
+        name = adapter['name']
+        i_type = adapter['m_type']
+        i_time = adapter['m_time']
         output = f'{name}\t{i_type}\t{i_time}\n'
         with open('./scrapy_result.csv', 'a+', encoding="utf-8") as result:
             result.write(output)
